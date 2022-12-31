@@ -292,29 +292,59 @@ function currentlyPlaying(){
     callApi( "GET", PLAYER + "?market=US", null, handleCurrentlyPlayingResponse );
 }
 
+class albumInfo {
+    constructor(image, title, artist) {
+        this.albumImage = image;
+        this.albumTitle = title;
+        this.trackArtist = artist;
+        this.review = "";
+
+        this.updateReview = function () {
+            this.review = "Test";
+        }
+    }
+}
+
+function addNewRow() {
+    var table = document.getElementById("albumTable");
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+
+    table.innerHTML += '' +
+                        '<tr bgcolor = "lightgrey">' 
+                        '<th>Test</th>'
+                        '<th>Test</th>'
+                        '<th>Test</th>'
+                        '<th>Test</th>'
+                        '/tr>'
+}
+
 function handleCurrentlyPlayingResponse(){
     if ( this.status == 200 ){
         var data = JSON.parse(this.responseText);
         console.log(data);
         if ( data.item != null ){
-            document.getElementById("albumImage").src = data.item.album.images[0].url;
+            currentAlbum = new albumInfo(data.item.album.images[0].url, data.item.album.name, data.item.artists[0].name)
+            document.getElementById("albumImage").src = currentAlbum.albumImage;
             document.getElementById("trackTitle").innerHTML = data.item.name;
-            document.getElementById("trackArtist").innerHTML = data.item.artists[0].name;
+            document.getElementById("albumTitle").innerHTML = currentAlbum.albumTitle;
+            document.getElementById("trackArtist").innerHTML = currentAlbum.trackArtist;
+            addNewRow()
         }
 
 
-        if ( data.device != null ){
-            // select device
-            currentDevice = data.device.id;
-            document.getElementById('devices').value=currentDevice;
-        }
+        //if ( data.device != null ){
+        //    // select device
+        //    currentDevice = data.device.id;
+        //    document.getElementById('devices').value=currentDevice;
+        //}
 
-        if ( data.context != null ){
-            // select playlist
-            currentPlaylist = data.context.uri;
-            currentPlaylist = currentPlaylist.substring( currentPlaylist.lastIndexOf(":") + 1,  currentPlaylist.length );
-            document.getElementById('playlists').value=currentPlaylist;
-        }
+        //if ( data.context != null ){
+        //    // select playlist
+        //    currentPlaylist = data.context.uri;
+        //    currentPlaylist = currentPlaylist.substring( currentPlaylist.lastIndexOf(":") + 1,  currentPlaylist.length );
+        //    document.getElementById('playlists').value=currentPlaylist;
+        //}
     }
     else if ( this.status == 204 ){
 

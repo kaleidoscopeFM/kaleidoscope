@@ -33,6 +33,10 @@ body{
     font-size:3em;
 }
 
+#albumTitle{
+    font-size:2.5em;
+}
+
 #trackArtist{
     font-size:2em;
 }
