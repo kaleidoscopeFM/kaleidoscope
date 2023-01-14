@@ -8,6 +8,8 @@ var client_secret = ""; // In a real app you should not expose your client_secre
 var access_token = null;
 var refresh_token = null;
 
+var userHistory=[];
+
 const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
 const PLAYER = "https://api.spotify.com/v1/me/player";
@@ -18,6 +20,7 @@ const CURRENTLYPLAYING = "https://api.spotify.com/v1/me/player/currently-playing
 function onPageLoad(){
     client_id = localStorage.getItem("client_id");
     client_secret = localStorage.getItem("client_secret");
+    userHistory = JSON.parse(localStorage.getItem("userHistory") || "[]");
     if ( window.location.search.length > 0 ){
         handleRedirect();
     }
@@ -172,6 +175,32 @@ function addNewRow(image, title, artist) {
                         '</tr>'
 }
 
+function createTable(albumInfo) {
+    var table = document.getElementById("albumTable");
+    var rowCount = table.rows.length;
+    if (rowCount > 1){
+        let i = 0;
+        while (i < rowCount-1) {
+            i++;
+            table.deleteRow(1);     
+        }
+    }
+
+    for(let i = 0; albumInfo.length; i++){
+        console.log(albumInfo[i].albumImage)
+        table.innerHTML += '' +
+                            '<tr bgcolor = "lightgrey">' +
+                            '<th>' + "<img id=\"albumImage\" src=\""+albumInfo[i].albumImage+"\">" + '</th>' +
+                            '<th>' + albumInfo[i].albumTitle + '</th>'+
+                            '<th>' + albumInfo[i].trackArtist + '</th>'+
+                            '<th>' + '' + '</th>'+
+                            '<th>' + '' + '</th>'+
+                            '</tr>'
+    }
+}
+
+
+
 function handleCurrentlyPlayingResponse(){
     if ( this.status == 200 ){
         var data = JSON.parse(this.responseText);
@@ -182,7 +211,9 @@ function handleCurrentlyPlayingResponse(){
             document.getElementById("trackTitle").innerHTML = data.item.name;
             document.getElementById("albumTitle").innerHTML = currentAlbum.albumTitle;
             document.getElementById("trackArtist").innerHTML = currentAlbum.trackArtist;
-            addNewRow(currentAlbum.albumImage,currentAlbum.albumTitle,currentAlbum.trackArtist)
+            userHistory.push(currentAlbum)
+            localStorage.setItem("userHistory",JSON.stringify(userHistory));
+            createTable(userHistory)
         }
     }
     else if ( this.status == 204 ){
@@ -196,3 +227,4 @@ function handleCurrentlyPlayingResponse(){
         alert(this.responseText);
     }
 }
+
