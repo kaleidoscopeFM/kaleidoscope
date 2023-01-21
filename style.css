@@ -7,8 +7,16 @@
 */
 
 body{
-    background-color: #c0c781ff;
+    background-color: #023020;
+    padding: 50px 0px 0px 0px;
+    z-index: 0;
 }
+
+.row-header {
+    margin: 0px auto;
+    padding: opx auto;
+}
+
 
 #tokenSection{
     display: none;
@@ -19,8 +27,9 @@ body{
 }
 
 .container{
-    padding: 20px;    
-    background-color: #78bc61ff;
+    padding: 15px;
+    background-color: #c0c781ff;
+    
 }
 
 #albumImage{
@@ -41,11 +50,11 @@ body{
     font-size:2em;
 }
 
-.welcomeText{
-    font-size:2em;
-}
-
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
   }
+
+.navbar-dark {
+    background-color: #D4FA9B;
+}
