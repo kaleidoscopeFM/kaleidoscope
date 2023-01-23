@@ -2,22 +2,23 @@
     "name": "confusion",
     "version": "1.0.0",
     "description": "Kaleidoscope Website",
-    "main": "frontpage.html",
+    "main": "index.html",
     "scripts": {
-      "start": "npm run lite",
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "lite": "lite-server"
+        "start": "npm run lite",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lite": "lite-server"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "lite-server": "^2.3.0"
+        "lite-server": "^2.3.0"
     },
     "dependencies": {
-      "bootstrap": "^4.0.0",
-      "jquery": "^3.3.1",
-      "popper": "^1.0.1",
-      "popper.js": "^1.12.9"
+        "bootstrap": "^4.0.0",
+        "font-awesome": "^4.7.0",
+        "fontawesome": "^5.6.3",
+        "jquery": "^3.3.1",
+        "popper": "^1.0.1",
+        "popper.js": "^1.12.9"
     }
-  }
-  
+}
