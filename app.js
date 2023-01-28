@@ -281,11 +281,17 @@ function currentlyPlaying(){
 
 class albumInfo {
     constructor(image, title, artist) {
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
         this.albumImage = image;
         this.albumTitle = title;
         this.trackArtist = artist;
+        this.lastListen = today.toDateString();
         this.review = "";
 
+        this.updatelastListen = function (date) {
+            this.lastListen = date;
+        }
         this.updateReview = function () {
             this.review = "Test";
         }
@@ -323,7 +329,7 @@ function createTable(albumInfo) {
                             '<th>' + "<img id=\"albumImage\" src=\""+albumInfo[i].albumImage+"\">" + '</th>' +
                             '<th>' + albumInfo[i].albumTitle + '</th>'+
                             '<th>' + albumInfo[i].trackArtist + '</th>'+
-                            '<th>' + '' + '</th>'+
+                            '<th>' + albumInfo[i].lastListen + '</th>'+
                             '<th>' + '' + '</th>'+
                             '</tr>'
     }
@@ -332,7 +338,14 @@ function createTable(albumInfo) {
 function checkDups(currentAlbum, userHistory){
     for(let i = 0; i < userHistory.length; i++){
         if(currentAlbum.albumTitle == userHistory[i].albumTitle & currentAlbum.trackArtist == userHistory[i].trackArtist){
-            return false;
+            if(currentAlbum.albumTitle == userHistory[i].albumTitle & currentAlbum.trackArtist == userHistory[i].trackArtist){
+                if(currentAlbum.lastListen == userHistory[i].lastListen){
+                    userHistory.splice(i, 1);
+                }
+                else{
+                return false;
+                }
+            }
         }
     } 
 
