@@ -324,12 +324,14 @@ function createTable(albumInfo) {
     }
 
     for(let i = 0; albumInfo.length; i++){
+        index = albumInfo.length - i -1;
         table.innerHTML += '' +
                             '<tr bgcolor = "lightgrey">' +
-                            '<th>' + "<img id=\"albumImage\" src=\""+albumInfo[i].albumImage+"\">" + '</th>' +
-                            '<th>' + albumInfo[i].albumTitle + '</th>'+
-                            '<th>' + albumInfo[i].trackArtist + '</th>'+
-                            '<th>' + albumInfo[i].lastListen + '</th>'+
+                            '<th>' + "<img id=\"albumImage\" src=\""+albumInfo[index].albumImage+"\">" + '</th>' +
+                            '<th>' + albumInfo[index].albumTitle + '</th>'+
+                            '<th>' + albumInfo[index].trackArtist + '</th>'+
+                            '<th>' + albumInfo[index].lastListen + '</th>'+
+                            '<th>' + '<button type=\"button\">Review</button>' + '</th>'+
                             '<th>' + '' + '</th>'+
                             '</tr>'
     }
