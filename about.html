@@ -47,26 +47,35 @@
                     <ul>
                         <li>https://accounts.spotify.com/authorize </li>
                         <li>https://accounts.spotify.com/api/token </li>
+                        <li>https://api.spotify.com/v1/me/playlists </li>
+                        <li>https://api.spotify.com/v1/me/player/devices </li>
+                        <li>https://api.spotify.com/v1/me/player/play </li>
+                        <li>https://api.spotify.com/v1/me/player/pause </li>
+                        <li>https://api.spotify.com/v1/me/player/next </li>
+                        <li>https://api.spotify.com/v1/me/player/previous </li>
                         <li>https://api.spotify.com/v1/me/player </li>
                         <li>https://api.spotify.com/v1/playlists/{{PlaylistId}}/tracks </li>
                         <li>https://api.spotify.com/v1/me/player/currently-playing </li>
+                        <li>https://api.spotify.com/v1/me/player/shuffle </li>
                     </ul>
                 </div> 
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="row row-header">         
-            <h2> Purpose </h2>
-            <div class="col col-sm order-sm-first col-md"></div>
-                    <li> The purpose of this site is to log albums listened to by a user and have the option to review them. </li>
         <div class="row row-header">
-            <h2>How to Use Kaleidoscope</h2>
+            <div class="col-12 col-sm-4 order-sm-first col-md-3">
+                <h2> Purpose </h2>
+            </div>
+            <div class="col col-sm order-sm-first col-md"></div>
+                    <li> This is a javascript app that shows how to use the Spotify API to control the playback of music (playlist or albums) on any of your devices connected to your spotify account. </li>
+        <div class="row row-header">
+            <h2> How to Use Kaleidoscope </h2>
         </div>
             <div class="col-auto">
                 <li>To use this app you need a Spotify client ID and client secret. You get these by creating an app in the Spotify developers dashboard here 
                     <a href="https://developer.spotify.com/dashboard/applications" target="_blank">https://developer.spotify.com/dashboard/applications</a> 
-                    and add http://127.0.0.1:5500/index.html in the "Redirect URIs" settings field.
+                    and add https://makeratplay.github.io/SpotifyWebAPI/ in the "Redirect URIs" settings field.
                 </li> 
             </div>                 
         </div>
