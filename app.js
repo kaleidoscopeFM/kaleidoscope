@@ -333,7 +333,8 @@ function createTable(albumInfo) {
                             '<th>' + albumInfo[index].albumTitle + '</th>'+
                             '<th>' + albumInfo[index].trackArtist + '</th>'+
                             '<th>' + albumInfo[index].lastListen + '</th>'+
-                            '<th>' + '<button type=\"button\">Review</button>' + '</th>'+
+                            '<th>' + '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Review</button>' + 
+                            '</th>'+
                             '<th>' + '' + '</th>'+
                             '</tr>'
     }
