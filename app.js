@@ -162,6 +162,7 @@ function onPageLoad(){
         if ( access_token == null ){
             // we don't have an access token so present token section
             document.getElementById("tokenSection").style.display = 'block';  
+            createTable(userHistory);
         }
         else {
             // we have an access token so present device section
@@ -279,6 +280,7 @@ function handleApiResponse(){
 
 function currentlyPlaying(){
     callApi( "GET", PLAYER + "?market=US", null, handleCurrentlyPlayingResponse );
+    createTable(userHistory);
 }
 
 class albumInfo {
@@ -371,7 +373,7 @@ function handleCurrentlyPlayingResponse(){
             document.getElementById("albumTitle").innerHTML = currentAlbum.albumTitle;
             document.getElementById("trackArtist").innerHTML = currentAlbum.trackArtist;
             checkDups(currentAlbum,userHistory);
-            createTable(userHistory);
+            
         }
     }
     else if ( this.status == 204 ){
