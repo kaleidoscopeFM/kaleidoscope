@@ -330,14 +330,13 @@ function createTable(albumInfo) {
     for(let i = 0; albumInfo.length; i++){
         index = albumInfo.length - i -1;
         table.innerHTML += '' +
-                            '<tr bgcolor = "lightgrey">' +
-                            '<th>' + "<img id=\"albumImage\" src=\""+albumInfo[index].albumImage+"\">" + '</th>' +
-                            '<th>' + albumInfo[index].albumTitle + '</th>'+
-                            '<th>' + albumInfo[index].trackArtist + '</th>'+
-                            '<th>' + albumInfo[index].lastListen + '</th>'+
-                            '<th>' + '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Review</button>' + 
-                            '</th>'+
-                            '<th>' + '' + '</th>'+
+                            '<tr>' +
+                            '<div id = "albumTableCover">' + "<img id=\"albumImage\" src=\""+albumInfo[index].albumImage+"\">" + '</div>'+
+                            '<div id = "albumTableTitle">' + albumInfo[index].albumTitle + '</div>'+
+                            '<div id = "albumTableArtist">' + albumInfo[index].trackArtist + '</div>'+
+                            '<div id = "albumTableLastListen">' + "Last Listened On: "+ albumInfo[index].lastListen + '</div>'+
+                            '<div>' + '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Review</button>' + '</div>'
+                            '</tr>'+
                             '</tr>'
     }
 }
