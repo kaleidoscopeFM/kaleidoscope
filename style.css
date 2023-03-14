@@ -63,3 +63,17 @@ table, th, td {
     box-sizing: border-box;
 }
 
+#albumTableInfo td{
+    border: none;
+}
+
+#albumTableInfo{
+    border: none;
+}
+
+#albumTableTitle{
+    font-size: 2em;
+}
+#albumTableArtist{
+    font-size: 1.5em;
+}
