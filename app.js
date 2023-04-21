@@ -18,137 +18,6 @@ const CURRENTLYPLAYING = "https://api.spotify.com/v1/me/player/currently-playing
 const openModalButtons = document.querySelectorAll('[data-modal-target]');
 const closeModalButtons = document.querySelectorAll('[data-close-button]');
 const overlay = document.getElementById('overlay')
-function LinkedList() {
-    var length = 0;
-    var head = null;
-
-    var Node = function(element){
-        this.element = element;
-        this.next = null;
-    }
-
-    this.size = function(){
-        return length;
-    }
-
-    this.head = function(){
-        return head;
-    }
-
-    this.add = function(element){
-        var node = new Node(element);
-        if(head === null){
-            head = node;
-        } else {
-            currentNode = head;
-
-            while(currentNode.next){
-                currentNode = currentNode.next
-            }
-
-            currentNode.next = node;
-        }
-
-        length++;
-    }
-
-    this.remove = function(element){
-        var currentNode = head;
-        if(currentNode.element === element){
-            head = currentNode.next;
-        } else {
-            while(currentNode.element !== element){
-                previousNode = currentNode.next;
-                currentNode = currentNode.next;
-            }
-
-            previousNode.next = currentNode.next;
-        }
-        
-        length --;
-    }
-
-    this.isEmpty = function(){
-        return length === 0;
-    }
-
-    this.indexOf = function(element){
-        var currentNode = head;
-        var index = -1;
-
-        while(currentNode){
-            index++;
-            if(currentNode.element === element){
-                return index;
-            }
-            currentNode = currentNode.next;
-        }
-
-        return -1;
-    }
-
-    this.elementAt = function(index){
-        var currentNode = head;
-        var count = 0;
-        while (count < index){
-            count ++;
-            currentNode = currentNode.next
-        }
-        return currentNode.element;
-    }
-
-    this.addAt = function(index, element){
-        var node = new Node(element);
-
-        var currentNode = head;
-        var previousNode;
-        var currentIndex = 0;
-
-        if(index > length){
-            return false;
-        }
-
-        if(index === 0){
-            node.next = currentNode;
-            head = node;
-        } else {
-            while(currentIndex < index){
-                currentIndex++;
-                previousNode - currentNode;
-                currentNode = currentNode.next;
-            }
-            node.next = currentNode;
-            previousNode.next = node;
-        }
-        length++;
-    }
-
-    this.removeAt = function(index, element){
-        var currentNode = head;
-        var previousNode;
-        var currentIndex = 0;
-
-        if(index < 0 || index >= length){
-            return null;
-        }
-
-        if(index === 0){
-            head = currentNode.next;
-        } else {
-            while(currentIndex < index){
-                currentIndex++;
-                previousNode - currentNode;
-                currentNode = currentNode.next;
-            };
-            previousNode.next = currentNode.next;
-        }
-        length--;
-        return currentNode.element
-    }
-}
-
-var albumConga = new LinkedList(); 
-
 
 function onPageLoad(){
     client_id = localStorage.getItem("client_id");
@@ -329,16 +198,25 @@ function createTable(albumInfo) {
 
     for(let i = 0; albumInfo.length; i++){
         index = albumInfo.length - i -1;
-        table.innerHTML += '' +
+        table.innerHTML +=  '' + 
                             '<tr>' +
+                            '<hr>' +
+                            '<div>' +
                             '<div id = "albumTableCover">' + "<img id=\"albumImage\" src=\""+albumInfo[index].albumImage+"\">" + '</div>'+
                             '<div id = "albumTableTitle">' + albumInfo[index].albumTitle + '</div>'+
                             '<div id = "albumTableArtist">' + albumInfo[index].trackArtist + '</div>'+
                             '<div id = "albumTableLastListen">' + "Last Listened On: "+ albumInfo[index].lastListen + '</div>'+
-                            '<div>' + '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Review</button>' + '</div>'
+                            '<div id = "albumnReview' + index +'">' + albumInfo[index].review +
+                            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" id="reviewButton" data-id="' + index +'" onclick="createModal(1)"data-bs-target="#myModal">Review</button>' + '</div>'
+                            '</div>' +
                             '</tr>'+
                             '</tr>'
     }
+}
+
+function createModal(id){
+    var footer = document.getElementById("reviewModalFooter")
+    footer.innerHTML += "<button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\" id = " + id + " >Save</button>"
 }
 
 function checkDups(currentAlbum, userHistory){
@@ -387,4 +265,16 @@ function handleCurrentlyPlayingResponse(){
     }
 }
 
+$('#reviewButton').on('click' , function(){
+            
+    let id = $(this).attr("data-id")
+    console.log(id)
+    saveReview(id,userHistory);
+    $('#myModal').modal('toggle'); // this is to close the modal after clicking the modal button
+})
+
+function saveReview(id,userHistory){
+    let text = $('#w3review').val();
+    userHistory[id].review = text;
+}      
 
