@@ -51,7 +51,9 @@ body{
 }
 
 table, th, td {
-    border: 1px solid black;
+    
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
     border-collapse: collapse;
   }
 
@@ -61,6 +63,11 @@ table, th, td {
 
 *, *::after, *::before {
     box-sizing: border-box;
+}
+
+#albumnTable table{
+    width: 100%;
+    border-right: none;
 }
 
 #albumTableInfo td{
@@ -76,4 +83,9 @@ table, th, td {
 }
 #albumTableArtist{
     font-size: 1.5em;
+}
+
+#albumnDetails{
+    vertical-align: top;
+    width: 100%;
 }

@@ -200,15 +200,14 @@ function createTable(albumInfo) {
         index = albumInfo.length - i -1;
         table.innerHTML +=  '' + 
                             '<tr>' +
-                            '<hr>' +
-                            '<div>' +
-                            '<div id = "albumTableCover">' + "<img id=\"albumImage\" src=\""+albumInfo[index].albumImage+"\">" + '</div>'+
+                            '<div>' + 
+                            '<td id = "albumTableCover">' + "<img id=\"albumImage\" src=\""+albumInfo[index].albumImage+"\">" + '</td>'+ '<td id="albumnDetails" >' +
                             '<div id = "albumTableTitle">' + albumInfo[index].albumTitle + '</div>'+
                             '<div id = "albumTableArtist">' + albumInfo[index].trackArtist + '</div>'+
                             '<div id = "albumTableLastListen">' + "Last Listened On: "+ albumInfo[index].lastListen + '</div>'+
                             '<div id = "albumnReview' + index +'">' + albumInfo[index].review +
                             '<button type="button" class="btn btn-primary" data-bs-toggle="modal" id="reviewButton" data-id="' + index +'" onclick="createModal(1)"data-bs-target="#myModal">Review</button>' + '</div>'
-                            '</div>' +
+                            '</td>' + '</div>' +
                             '</tr>'+
                             '</tr>'
     }
