@@ -205,8 +205,8 @@ function createTable(albumInfo) {
                             '<div id = "albumTableTitle">' + albumInfo[index].albumTitle + '</div>'+
                             '<div id = "albumTableArtist">' + albumInfo[index].trackArtist + '</div>'+
                             '<div id = "albumTableLastListen">' + "Last Listened On: "+ albumInfo[index].lastListen + '</div>'+
-                            '<div id = "albumnReview' + index +'">' + albumInfo[index].review +
-                            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" id="reviewButton" data-id="' + index +'" onclick="createModal(1)"data-bs-target="#myModal">Review</button>' + '</div>'
+                            '<div id = "albumnReview' + index +'">' + albumInfo[index].review + '</div>'+
+                            '<button type="button" class="btn btn-primary" data-bs-toggle="modal" id="reviewButton" data-id="' + index +'" onclick="createModal('+ index +')"data-bs-target="#myModal">Review</button>' + '</div>'
                             '</td>' + '</div>' +
                             '</tr>'+
                             '</tr>'
@@ -214,8 +214,21 @@ function createTable(albumInfo) {
 }
 
 function createModal(id){
-    var footer = document.getElementById("reviewModalFooter")
-    footer.innerHTML += "<button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\" id = " + id + " >Save</button>"
+    var footer = document.getElementById("reviewModalFooter");
+    footer.innerHTML += "<button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\" id = " + id + " onclick=\"saveReview(userHistory," + id + ")\">Save</button>";
+}
+
+function removeModal(){
+    var footer = document.getElementById("reviewModalFooter");
+    footer.innerHTML = "<button type=\"button\" class=\"btn btn-danger\" data-bs-dismiss=\"modal\" onclick=\"removeModal()\" >Close</button>";
+}
+
+function saveReview(userHistory, id){
+    removeModal();
+    var reviewText = document.getElementById("w3review").value;
+    userHistory[id].review = reviewText;
+    localStorage.setItem("userHistory",JSON.stringify(userHistory));
+    createTable(userHistory);
 }
 
 function checkDups(currentAlbum, userHistory){
@@ -233,7 +246,6 @@ function checkDups(currentAlbum, userHistory){
     } 
 
     userHistory.push(currentAlbum);
-    albumConga.add(currentAlbum);
     localStorage.setItem("userHistory",JSON.stringify(userHistory));
     
     }
@@ -264,16 +276,7 @@ function handleCurrentlyPlayingResponse(){
     }
 }
 
-$('#reviewButton').on('click' , function(){
-            
-    let id = $(this).attr("data-id")
-    console.log(id)
-    saveReview(id,userHistory);
-    $('#myModal').modal('toggle'); // this is to close the modal after clicking the modal button
+$('#myModal').modal({
+    backdrop: 'static',
+    keyboard: false
 })
-
-function saveReview(id,userHistory){
-    let text = $('#w3review').val();
-    userHistory[id].review = text;
-}      
-

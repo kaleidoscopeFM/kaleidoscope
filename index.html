@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     
-    <script defer src="app.js" ></script>
+    <script async src="app.js" ></script>
     
 </head>
 
@@ -116,7 +116,7 @@
             <!-- Modal Header -->
             <div class="modal-header">
               <h4 class="modal-title">Review</h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              <button type="button" class="btn-close" onclick="removeModal()" data-bs-dismiss="modal"></button>
             </div>
       
             <!-- Modal body -->
@@ -126,32 +126,13 @@
       
             <!-- Modal footer -->
             <div class="modal-footer" id="reviewModalFooter">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id = "reviewButtonSave" >Save</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="removeModal()" >Close</button>
+              
             </div>
             
           </div>
         </div>
       </div>
-      <script defer>
-        $('#reviewButtonSave').on('click' , function(){
-            
-            let id = $(this).data('data-id');
-            console.log(id);
-        })
-        $('#reviewButton').on('click' , function(e){
-            
-            let id = $(e.target).data('data-id');
-            console.log(id);
-            saveReview(id,userHistory);
-            $('#myModal').modal('toggle'); // this is to close the modal after clicking the modal button
-        })
-
-        function saveReview(id,userHistory){
-            let text = $('#w3review').val();
-            userHistory[id].review = text;
-        }        
-      </script>
 </body>
 
 </html>
