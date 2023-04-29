@@ -90,3 +90,8 @@ table, th, td {
     vertical-align: top;
     width: 100%;
 }
+
+#albumnReview{
+    font-size:1.25em;
+    font-style: italic;
+}

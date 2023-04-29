@@ -205,7 +205,7 @@ function createTable(albumInfo) {
                             '<div id = "albumTableTitle">' + albumInfo[index].albumTitle + '</div>'+
                             '<div id = "albumTableArtist">' + albumInfo[index].trackArtist + '</div>'+
                             '<div id = "albumTableLastListen">' + "Last Listened On: "+ albumInfo[index].lastListen + '</div>'+
-                            '<div id = "albumnReview' + index +'">' + albumInfo[index].review + '</div>'+
+                            '<div id = "albumnReview">' + albumInfo[index].review + '</div>'+
                             '<button type="button" class="btn btn-primary" data-bs-toggle="modal" id="reviewButton" data-id="' + index +'" onclick="createModal('+ index +')"data-bs-target="#myModal">Review</button>' + '</div>'
                             '</td>' + '</div>' +
                             '</tr>'+
