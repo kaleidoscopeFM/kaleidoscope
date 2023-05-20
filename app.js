@@ -7,7 +7,7 @@ var client_secret = ""; // In a real app you should not expose your client_secre
 var access_token = null;
 var refresh_token = null;
 
-var userHistory=[];
+var userHistory=[]; // Array to store user listens
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -151,6 +151,7 @@ function currentlyPlaying(){
     createTable(userHistory);
 }
 
+// Creates Albumn Object
 class albumInfo {
     constructor(image, title, artist) {
         const timeElapsed = Date.now();
@@ -160,19 +161,12 @@ class albumInfo {
         this.trackArtist = artist;
         this.lastListen = today.toDateString();
         this.review = "";
-
-        this.updatelastListen = function (date) {
-            this.lastListen = date;
-        }
-        this.updateReview = function () {
-            this.review = "Test";
-        }
     }
 }
 
+// Functions adds new row to table of albumns
 function addNewRow(image, title, artist) {
     var table = document.getElementById("albumTable");
-    var rowCount = table.rows.length;
     
     table.innerHTML += '' +
                         '<tr bgcolor = "lightgrey">' +
@@ -184,6 +178,7 @@ function addNewRow(image, title, artist) {
                         '</tr>'
 }
 
+// The createTable function generates the table
 function createTable(albumInfo) {
     var table = document.getElementById("albumTable");
     var rowCount = table.rows.length;
@@ -212,16 +207,19 @@ function createTable(albumInfo) {
     }
 }
 
+// Adds the modal button that is associated with the albumn
 function createModal(id){
     var footer = document.getElementById("reviewModalFooter");
     footer.innerHTML += "<button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\" id = " + id + " onclick=\"saveReview(userHistory," + id + ")\">Save</button>";
 }
 
+// Removes the modal button that is associated with the albumn
 function removeModal(){
     var footer = document.getElementById("reviewModalFooter");
     footer.innerHTML = "<button type=\"button\" class=\"btn btn-danger\" data-bs-dismiss=\"modal\" onclick=\"removeModal()\" >Close</button>";
 }
 
+// Updates the review of the albumn in the array
 function saveReview(userHistory, id){
     removeModal();
     var reviewText = document.getElementById("w3review").value;
@@ -230,6 +228,8 @@ function saveReview(userHistory, id){
     createTable(userHistory);
 }
 
+
+// Checks if the albumn currently being listened to has been listened to before
 function checkDups(currentAlbum, userHistory){
     for(let i = 0; i < userHistory.length; i++){
         if(currentAlbum.albumTitle == userHistory[i].albumTitle & currentAlbum.trackArtist == userHistory[i].trackArtist){
