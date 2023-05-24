@@ -260,7 +260,10 @@ function handleCurrentlyPlayingResponse(){
             document.getElementById("albumTitle").innerHTML = currentAlbum.albumTitle;
             document.getElementById("trackArtist").innerHTML = currentAlbum.trackArtist;
             checkDups(currentAlbum,userHistory);
-            
+            document.getElementById("currentListen").style.visibility = "visible";
+        }
+        else {
+            document.getElementById("currentListen").style.visibility = "hidden";
         }
     }
     else if ( this.status == 204 ){
